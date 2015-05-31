@@ -1,0 +1,31 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ */
+public abstract class Fish implements FishActions {
+
+	/**
+	 * @see io.stevenpg.FishActions#swim()
+	 */
+	@Override
+	public void swim() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @see io.stevenpg.FishActions#drawFishImage()
+	 */
+	@Override
+	public void drawFishImage() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

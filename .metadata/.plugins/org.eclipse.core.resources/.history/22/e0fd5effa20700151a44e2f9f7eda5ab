@@ -1,0 +1,14 @@
+/**
+ * Enclosing package for the entire application
+ */
+package io.stevenpg;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * 
+ */
+public interface Fish {
+
+}

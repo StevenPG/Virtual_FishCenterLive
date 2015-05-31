@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * This class implements FishActions, and contains
+ * a blueprint for each fish to extend
+ */
+public abstract class Fish implements FishActions {
+
+	/**
+	 * @see io.stevenpg.FishActions#swim()
+	 */
+	@Override
+	public void swim(){
+		
+	}
+
+	/**
+	 * @see io.stevenpg.FishActions#drawFishImage()
+	 */
+	@Override
+	public abstract void drawFishImage();
+
+}

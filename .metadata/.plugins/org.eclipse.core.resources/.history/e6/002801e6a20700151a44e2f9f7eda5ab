@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+/**
+ * @author Steven
+ *
+ */
+public interface Fish {
+
+}
