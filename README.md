@@ -1,4 +1,4 @@
-# FishCenterLive-Aquarium
+# Virtual_FishCenterLive
 This repository contains an application that was
 inspired by FishCenterLive, a web series that
 raises the bar with their fish-based comedy and sports reporting.
