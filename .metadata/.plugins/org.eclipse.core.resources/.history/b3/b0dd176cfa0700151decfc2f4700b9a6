@@ -109,6 +109,7 @@ public class Tank extends Frame implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {		
+		// Actual execution
 		Tank fishCenter = new Tank();
 		fishCenter.whoopwhoopImDone();
 	}

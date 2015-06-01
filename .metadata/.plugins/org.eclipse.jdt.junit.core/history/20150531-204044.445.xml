@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ObjectInstantiationTesting" project="FishCenterLive-Aquarium" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="io.stevenpg.ObjectInstantiationTesting" time="0.09">
-    <testcase name="testTank" classname="io.stevenpg.ObjectInstantiationTesting" time="0.089"/>
-    <testcase name="TangNameTest" classname="io.stevenpg.ObjectInstantiationTesting" time="0.0"/>
-    <testcase name="HamburgerNameTest" classname="io.stevenpg.ObjectInstantiationTesting" time="0.0"/>
-    <testcase name="testHambugerCreation" classname="io.stevenpg.ObjectInstantiationTesting" time="0.0"/>
-    <testcase name="testTangCreation" classname="io.stevenpg.ObjectInstantiationTesting" time="0.001"/>
-  </testsuite>
-</testrun>

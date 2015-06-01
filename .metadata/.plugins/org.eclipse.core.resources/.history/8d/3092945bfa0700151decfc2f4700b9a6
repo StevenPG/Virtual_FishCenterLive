@@ -108,7 +108,12 @@ public class Tank extends Frame implements Runnable {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
+		
+		// Perform a unit test
+		ObjectInstantiationTesting test = new ObjectInstantiationTesting();
+		
+		// Actual execution
 		Tank fishCenter = new Tank();
 		fishCenter.whoopwhoopImDone();
 	}

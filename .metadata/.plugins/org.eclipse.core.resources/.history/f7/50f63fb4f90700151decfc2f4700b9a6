@@ -69,25 +69,6 @@ public class Tank extends Frame implements Runnable {
 	 */
 	public Tank() {
 		setTitle("Virtual_FishCenterLive");
-		
-		// Initialize graphical elements
-		tracker = new MediaTracker(this);
-		
-		// Retrieve fish graphics from function
-		// fishImages = getFishPix();
-		
-		// Add trackers in function
-		
-		// Handle background image and add tracker
-		
-		try{
-			// tracker.waitForId(0);
-		} catch(Exception ex){
-			System.out.println("Waiting for IDs to load... failed...");
-			System.out.println(ex.getMessage());
-			ex.printStackTrace();
-		}
-		
 	}
 
 	/**
@@ -108,7 +89,7 @@ public class Tank extends Frame implements Runnable {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		Tank fishCenter = new Tank();
 		fishCenter.whoopwhoopImDone();
 	}

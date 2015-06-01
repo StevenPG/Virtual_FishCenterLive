@@ -85,7 +85,7 @@ public class Tank extends Frame implements Runnable {
 		} catch(Exception ex){
 			System.out.println("Waiting for IDs to load... failed...");
 			System.out.println(ex.getMessage());
-			ex.printStackTrace();
+			ex.printStackTrace()
 		}
 		
 	}
@@ -108,7 +108,7 @@ public class Tank extends Frame implements Runnable {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		Tank fishCenter = new Tank();
 		fishCenter.whoopwhoopImDone();
 	}

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ObjectInstantiationTesting" project="FishCenterLive-Aquarium" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="io.stevenpg.ObjectInstantiationTesting" time="0.0">
-    <testcase name="HamburgerNameTest" classname="io.stevenpg.ObjectInstantiationTesting" time="0.0"/>
-    <testcase name="testHambugerCreation" classname="io.stevenpg.ObjectInstantiationTesting" time="0.0"/>
-  </testsuite>
-</testrun>
