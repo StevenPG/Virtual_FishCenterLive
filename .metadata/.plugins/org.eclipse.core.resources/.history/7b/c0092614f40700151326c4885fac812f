@@ -1,0 +1,68 @@
+/**
+ * Enclosing package for the entire application
+ */
+package io.stevenpg;
+
+import java.awt.*;
+import java.util.Random;
+import java.util.Vector;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * This class implements FishActions, and contains
+ * a blueprint for each fish to extend
+ */
+public abstract class Fish implements FishActions {
+
+	/**
+	 * Contains information on the tank
+	 */
+	Component tank;
+	
+	/**
+	 * Generates random numbers to represent
+	 * the fish's seemingly random behaviour
+	 */
+	Random random;
+	
+	/**
+	 * Contains the fish's current location within the tank.
+	 */
+	Point location;
+	
+	/**
+	 * Contains the fish's current speed
+	 */
+	Point velocity;
+	
+	/**
+	 * Specifies what portion of the tank the fish
+	 * is able to randomly swim around in.
+	 */
+	Rectangle edges;
+	
+	/**
+	 * Contains all possible images of extending Fish
+	 */
+	Vector<Fish> fishImage;
+	
+	/**
+	 * Contains the fish's name
+	 */
+	String name;
+	
+	/**
+	 * @see io.stevenpg.FishActions#swim()
+	 */
+	@Override
+	public void swim();
+
+	/**
+	 * @see io.stevenpg.FishActions#drawFishImage()
+	 */
+	@Override
+	public abstract void drawFishImage();
+
+}

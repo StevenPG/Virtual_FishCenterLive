@@ -1,0 +1,43 @@
+/**
+ * Enclosing package for the entire application
+ */
+package io.stevenpg;
+
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.Vector;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * These unit tests should cover all general
+ * case scenarios as well as object instantiations
+ * and method calls.
+ * JUnit Assertions can be found:
+ * 	https://github.com/junit-team/junit/wiki/Assertions
+ */
+public class Hamburger extends Fish {
+	
+	public Hamburger(Vector<Fish> fishImage, Rectangle edges, Component tank){
+		this.tank = tank;
+		this.fishImage = fishImage;
+		this.edges = edges;
+		this.location = new Point(
+				100 + (Math.abs(random.nextInt()) % 300),
+				100 + (Math.abs(100 + random.nextInt()) % 100)
+				);
+		this.velocity = new Point(random.nextInt() % 8, random.nextInt() % 8);
+	}
+
+	/**
+	 * @see io.stevenpg.Fish#drawFishImage()
+	 */
+	@Override
+	public void drawFishImage() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

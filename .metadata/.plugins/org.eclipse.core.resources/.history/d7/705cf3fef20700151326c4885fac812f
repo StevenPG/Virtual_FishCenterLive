@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * These unit tests should cover all general
+ * case scenarios as well as object instantiations
+ * and method calls.
+ * JUnit Assertions can be found:
+ * 	https://github.com/junit-team/junit/wiki/Assertions
+ */
+public class Hamburger extends Fish {
+
+	/* (non-Javadoc)
+	 * @see io.stevenpg.Fish#drawFishImage()
+	 */
+	@Override
+	public void drawFishImage() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+/**
+ * @author Steven
+ *
+ */
+public class Hamburger extends Fish {
+
+	/* (non-Javadoc)
+	 * @see io.stevenpg.Fish#drawFishImage()
+	 */
+	@Override
+	public void drawFishImage() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+/**
+ * @author Steven
+ *
+ */
+public class ObjectInstantiationTesting {
+
+	@Test
+	public void test() {
+		assertEquals("fail", true);
+	}
+
+}

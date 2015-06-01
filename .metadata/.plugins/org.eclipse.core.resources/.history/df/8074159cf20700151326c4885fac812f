@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ * This class implements FishActions, and contains
+ * a blueprint for each fish to extend
+ */
+public class ObjectInstantiationTesting {
+
+	@Test
+	public void test() {
+		
+	}
+
+}

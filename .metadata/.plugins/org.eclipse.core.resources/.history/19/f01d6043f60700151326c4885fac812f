@@ -1,0 +1,41 @@
+/**
+ * Enclosing package for the entire application
+ */
+package io.stevenpg;
+
+import java.awt.Frame;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ */
+public class Tank extends Frame implements Runnable {
+
+	/**
+	 * Default serialVersionUID for multi-threading
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Tank() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Tank fishCenter = new Tank();
+
+	}
+
+}
