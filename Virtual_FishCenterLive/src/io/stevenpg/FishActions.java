@@ -3,6 +3,8 @@
  */
 package io.stevenpg;
 
+import java.awt.Graphics;
+
 /**
  * @author StevenPG
  * @see https://github.com/StevenPG
@@ -21,6 +23,6 @@ public interface FishActions {
 	/**
 	 * Draw the fish to the screen at its current location.
 	 */
-	public void drawFishImage();
+	public void drawFishImage(Graphics g);
 	
 }

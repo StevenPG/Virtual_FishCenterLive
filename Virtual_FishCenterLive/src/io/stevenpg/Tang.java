@@ -4,6 +4,8 @@
 package io.stevenpg;
 
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -19,9 +21,9 @@ import java.util.Vector;
  */
 public class Tang extends Fish {
 
-	public Tang(Vector<Fish> fishImage, Rectangle edges, Component tank){
+	public Tang(Vector<Image> images, Rectangle edges, Component tank){
 		this.tank = tank;
-		this.fishImage = fishImage;
+		this.fishImage = images;
 		this.edges = edges;
 		this.random = new Random(System.currentTimeMillis());
 		this.name = "Tang";
@@ -37,7 +39,41 @@ public class Tang extends Fish {
 	 */
 	@Override
 	public void swim() {
-		// TODO Auto-generated method stub
+		if(random.nextInt() % 7 <= 1){
+			velocity.x += random.nextInt() % 20;
+			
+			// Keep the velocity within -8 and 8
+			velocity.x = Math.min(velocity.x, 20);
+			velocity.x = Math.max(velocity.x, -20);
+			
+			velocity.y += random.nextInt() % 20;
+			
+			velocity.y = Math.min(velocity.y, 20);
+			velocity.y = Math.max(velocity.y, -20);
+		}
+		
+		// Assign new location
+		location.x += velocity.x;
+		location.y += velocity.y;
+		
+		// Determine if the fish's position has put it beyond the
+		//	edge of the tank. This creates the "bounce-off" effect.
+		if(location.x < edges.x){
+			location.x = edges.x;
+			velocity.x = -velocity.x;
+		}
+		if((location.x + fishImage.get(0).getWidth(tank)) > (edges.x + edges.width)){
+			location.x = edges.x + edges.width - fishImage.get(0).getWidth(tank);
+			velocity.x = -velocity.x;
+		}
+		if(location.y < edges.y){
+			location.y = edges.y;
+			velocity.y = -velocity.y;
+		}
+		if((location.y + fishImage.get(0).getHeight(tank)) > (edges.y + edges.height)){
+			location.y = edges.y + edges.height - fishImage.get(0).getHeight(tank);
+			velocity.y = -velocity.y;
+		}
 
 	}
 
@@ -45,9 +81,13 @@ public class Tang extends Fish {
 	 * @see io.stevenpg.Fish#drawFishImage()
 	 */
 	@Override
-	public void drawFishImage() {
-		// TODO Auto-generated method stub
-
+	public void drawFishImage(Graphics g) {
+		if(velocity.x < 0){
+			g.drawImage(fishImage.get(1), location.x, location.y, tank);
+		}
+		else {
+			g.drawImage(fishImage.get(0), location.x, location.y, tank);
+		}
 	}
 
 }

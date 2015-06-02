@@ -4,6 +4,8 @@
 package io.stevenpg;
 
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -19,9 +21,9 @@ import java.util.Vector;
  */
 public class Hamburger extends Fish {
 	
-	public Hamburger(Vector<Fish> fishImage, Rectangle edges, Component tank){
+	public Hamburger(Vector<Image> images, Rectangle edges, Component tank){
 		this.tank = tank;
-		this.fishImage = fishImage;
+		this.fishImage = images;
 		this.edges = edges;
 		this.random = new Random(System.currentTimeMillis());
 		this.name = "Hamburger";
@@ -36,7 +38,7 @@ public class Hamburger extends Fish {
 	 * @see io.stevenpg.Fish#drawFishImage()
 	 */
 	@Override
-	public void drawFishImage() {
+	public void drawFishImage(Graphics g) {
 		// TODO Auto-generated method stub
 
 	}
