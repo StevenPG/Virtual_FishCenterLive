@@ -1,0 +1,19 @@
+package io.stevenpg;
+
+import java.awt.Graphics;
+
+public class Dotty extends Fish {
+
+	@Override
+	public void swim() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void drawFishImage(Graphics g) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

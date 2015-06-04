@@ -1,0 +1,32 @@
+/**
+ * 
+ */
+package io.stevenpg;
+
+import java.awt.Graphics;
+
+/**
+ * @author Steven
+ *
+ */
+public class SirSquirt extends Fish {
+
+	/* (non-Javadoc)
+	 * @see io.stevenpg.Fish#swim()
+	 */
+	@Override
+	public void swim() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see io.stevenpg.Fish#drawFishImage(java.awt.Graphics)
+	 */
+	@Override
+	public void drawFishImage(Graphics g) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
