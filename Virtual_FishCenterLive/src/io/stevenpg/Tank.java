@@ -45,7 +45,7 @@ public class Tank extends Frame implements Runnable {
 	 * Handle fish objects
 	 */
 	int numberOfFish = 9;
-	int sleepTime = 110;
+	int sleepTime = 70;
 	
 	/**
 	 * Boolean to determine whether the
@@ -75,6 +75,7 @@ public class Tank extends Frame implements Runnable {
 		setTitle("Virtual_FishCenterLive");
 		
 		// Assign window attributes
+		this.setIconImage(ImageIO.read(new File("images/Icon.png")));
 		int SizeOfTaskBarInWindows = 40;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize((int)screenSize.getWidth(), (int) screenSize.getHeight() - SizeOfTaskBarInWindows);
@@ -109,10 +110,24 @@ public class Tank extends Frame implements Runnable {
 	private Vector<Image> getFishPix() {
 		Vector<Image> fishPix = new Vector<Image>();
 		try {
-			// Create Tang
+			// Retrieve fish images
 			fishPix.add(ImageIO.read(new File("images/TangRight.gif")));
 			fishPix.add(ImageIO.read(new File("images/TangLeft.gif")));
-			
+			fishPix.add(ImageIO.read(new File("images/oleBlueRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/oleBlueLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/MimosaRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/MimosaLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/GreenbirdRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/GreenbergLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/SirSquirtRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/SirSquirtLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/dottyRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/dottyLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/MammothRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/MammothLeft.gif")));
+			fishPix.add(ImageIO.read(new File("images/Hamburger.gif")));
+			fishPix.add(ImageIO.read(new File("images/thlumpRight.gif")));
+			fishPix.add(ImageIO.read(new File("images/thlumpLeft.gif")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -124,20 +139,53 @@ public class Tank extends Frame implements Runnable {
 	 */
 	@Override
 	public void run() {
+		int left = 0 + getInsets().left;
+		int top = 0 + getInsets().top;
+		int right = getSize().width - (getInsets().left + getInsets().right);
+		int bottom = getSize().height - (getInsets().top + getInsets().bottom);
 		Rectangle edges = new Rectangle(
-			0 + getInsets().left, // Get left edge
-			0 + getInsets().top,  // Get top edge
-			getSize().width - (getInsets().left + getInsets().right), // Get right edge
-			getSize().height - (getInsets().top + getInsets().bottom) // Get left edge
+			left, // Get left edge (- 25% to go left)
+			top,  // Get top edge( - 25% to go above)
+			right, // Get right edge to go right, 25%
+			bottom // Leave the bottom
 		);
 		
 		// Create fish and add to fish vector
-		for(int loopIndex = 0; loopIndex < numberOfFish; loopIndex++){
-			Vector<Image> TangPix = new Vector<Image>();
-			TangPix.add(fishImages.get(0));
-			TangPix.add(fishImages.get(1));
-			fishes.add(new Tang(TangPix, edges, this));
-		}
+		Vector<Image> TangPix = new Vector<Image>();
+		Vector<Image> oleBluePix = new Vector<Image>();
+		Vector<Image> MimosaPix = new Vector<Image>();
+		Vector<Image> GreenbirdPix = new Vector<Image>();
+		Vector<Image> SirSquirtPix = new Vector<Image>();
+		Vector<Image> DottyPix = new Vector<Image>();
+		Vector<Image> MammothPix = new Vector<Image>();
+		Vector<Image> HamburgerPix = new Vector<Image>();
+		Vector<Image> ThlumpPix = new Vector<Image>();
+		TangPix.add(fishImages.get(0));
+		TangPix.add(fishImages.get(1));
+		oleBluePix.add(fishImages.get(2));
+		oleBluePix.add(fishImages.get(3));
+		MimosaPix.add(fishImages.get(4));
+		MimosaPix.add(fishImages.get(5));
+		GreenbirdPix.add(fishImages.get(6));
+		GreenbirdPix.add(fishImages.get(7));
+		SirSquirtPix.add(fishImages.get(8));
+		SirSquirtPix.add(fishImages.get(9));
+		DottyPix.add(fishImages.get(10));
+		DottyPix.add(fishImages.get(11));
+		MammothPix.add(fishImages.get(12));
+		MammothPix.add(fishImages.get(13));
+		HamburgerPix.add(fishImages.get(14));
+		ThlumpPix.add(fishImages.get(15));
+		ThlumpPix.add(fishImages.get(16));
+		fishes.add(new Hamburger(HamburgerPix, edges, this));
+		fishes.add(new Thlump(ThlumpPix, edges, this));
+		fishes.add(new Tang(TangPix, edges, this));
+		fishes.add(new OleBlue(oleBluePix, edges, this));
+		fishes.add(new Mimosa(MimosaPix, edges, this));
+		fishes.add(new GreenBird(GreenbirdPix, edges, this));
+		fishes.add(new SirSquirt(SirSquirtPix, edges, this));
+		fishes.add(new Dotty(DottyPix, edges, this));
+		fishes.add(new Mammoth(MammothPix, edges,this));
 		
 		// Loop while fish swim
 		while(continueSwimming){
@@ -165,7 +213,7 @@ public class Tank extends Frame implements Runnable {
 	public void update(Graphics g){
 		// Draw the tank and the fish
 		memoryGraphics.drawImage(tankImage, 0, 0, this);
-		for(int loopIndex = 0; loopIndex < 1; loopIndex++){
+		for(int loopIndex = 0; loopIndex < numberOfFish; loopIndex++){
 			((Fish)fishes.elementAt(loopIndex)).drawFishImage
 				(memoryGraphics);
 		}

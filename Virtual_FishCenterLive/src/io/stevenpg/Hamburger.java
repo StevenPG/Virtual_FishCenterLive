@@ -25,13 +25,25 @@ public class Hamburger extends Fish {
 		this.tank = tank;
 		this.fishImage = images;
 		this.edges = edges;
-		this.random = new Random(System.currentTimeMillis());
+		// Tang is allowed to move beyond the tank, so increase edges by 25% (Do not increase top)
+		int extraBounds = (int) ((int)this.edges.width * .25);
+		this.edges.x = this.edges.x - extraBounds;
+		this.edges.width += extraBounds;
+		this.random = new Random(System.currentTimeMillis() + 1000);
 		this.name = "Hamburger";
 		this.location = new Point(
-				100 + (Math.abs(random.nextInt()) % 300),
-				100 + (Math.abs(100 + random.nextInt()) % 100)
+				255,
+				716
 				);
 		this.velocity = new Point(random.nextInt() % 8, random.nextInt() % 8);
+	}
+
+	/**
+	 * @see io.stevenpg.Fish#swim()
+	 */
+	@Override
+	public void swim() {
+
 	}
 
 	/**
@@ -39,14 +51,8 @@ public class Hamburger extends Fish {
 	 */
 	@Override
 	public void drawFishImage(Graphics g) {
-		// TODO Auto-generated method stub
+		g.drawImage(fishImage.get(0), location.x, location.y, tank);
 
-	}
-
-	@Override
-	public void swim() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

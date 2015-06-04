@@ -25,11 +25,15 @@ public class Tang extends Fish {
 		this.tank = tank;
 		this.fishImage = images;
 		this.edges = edges;
-		this.random = new Random(System.currentTimeMillis());
+		// Tang is allowed to move beyond the tank, so increase edges by 25% (Do not increase top)
+		int extraBounds = (int) ((int)this.edges.width * .25);
+		this.edges.x = this.edges.x - extraBounds;
+		this.edges.width += extraBounds;
+		this.random = new Random(System.currentTimeMillis() + 1000);
 		this.name = "Tang";
 		this.location = new Point(
-				100 + (Math.abs(random.nextInt()) % 300),
-				100 + (Math.abs(100 + random.nextInt()) % 100)
+				400 + (Math.abs(random.nextInt()) % 300),
+				400 + (Math.abs(100 + random.nextInt()) % 100)
 				);
 		this.velocity = new Point(random.nextInt() % 8, random.nextInt() % 8);
 	}
@@ -40,16 +44,16 @@ public class Tang extends Fish {
 	@Override
 	public void swim() {
 		if(random.nextInt() % 7 <= 1){
-			velocity.x += random.nextInt() % 20;
+			// Prefer fast horizontal motion and slow vertical motion
+			velocity.x += random.nextInt() % 25;
 			
-			// Keep the velocity within -8 and 8
-			velocity.x = Math.min(velocity.x, 20);
-			velocity.x = Math.max(velocity.x, -20);
+			velocity.x = Math.min(velocity.x, 25);
+			velocity.x = Math.max(velocity.x, -25);
 			
-			velocity.y += random.nextInt() % 20;
+			velocity.y += random.nextInt() % 5;
 			
-			velocity.y = Math.min(velocity.y, 20);
-			velocity.y = Math.max(velocity.y, -20);
+			velocity.y = Math.min(velocity.y, 5);
+			velocity.y = Math.max(velocity.y, -5);
 		}
 		
 		// Assign new location
