@@ -29,7 +29,7 @@ public class Dotty extends Fish {
 		int extraBounds = (int) ((int)this.edges.width * .25);
 		this.edges.x = this.edges.x - extraBounds;
 		this.edges.width += extraBounds;
-		this.random = new Random(System.currentTimeMillis() + 1000);
+		this.random = new Random(System.currentTimeMillis() + 9000);
 		this.name = "Dotty";
 		this.location = new Point(
 				400 + (Math.abs(random.nextInt()) % 300),

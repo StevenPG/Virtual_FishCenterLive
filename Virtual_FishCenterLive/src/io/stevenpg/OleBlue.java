@@ -28,7 +28,7 @@ public class OleBlue extends Fish{
 		int extraBounds = (int) ((int)this.edges.width * .25);
 		this.edges.x = this.edges.x - extraBounds;
 		this.edges.width += extraBounds;
-		this.random = new Random(System.currentTimeMillis() + 2000);
+		this.random = new Random(System.currentTimeMillis() + 4000);
 		this.name = "OleBlue";
 		this.location = new Point(
 				100 + (Math.abs(random.nextInt()) % 300),

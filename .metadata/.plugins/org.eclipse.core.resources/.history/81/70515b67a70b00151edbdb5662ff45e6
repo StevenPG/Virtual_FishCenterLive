@@ -1,0 +1,264 @@
+/**
+ * Enclosing package for the entire application
+ */
+package io.stevenpg;
+
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.Vector;
+
+import javax.imageio.ImageIO;
+
+/**
+ * @author StevenPG
+ * @see https://github.com/StevenPG
+ * Date: 5/31/2015
+ */
+public class Tank extends Frame implements Runnable {
+
+	/**
+	 * Default serialVersionUID for multi-threading
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Handle all visuals within awt.Frame.
+	 */
+	MediaTracker tracker;
+	
+	/**
+	 * Contains visuals for application.
+	 */
+	Image tankImage, memoryImage;
+	Vector<Image> fishImages;
+	
+	/**
+	 * Main thread that controls the fish
+	 * and implements Runnable.
+	 */
+	Thread thread;
+	
+	/**
+	 * Handle fish objects
+	 */
+	int numberOfFish = 9;
+	int sleepTime = 70;
+	
+	/**
+	 * Boolean to determine whether the
+	 * fish should be actively moving
+	 */
+	boolean continueSwimming = true;
+	
+	/**
+	 * Thread safe vector of all 9
+	 * fish center fish.
+	 */
+	Vector<Fish> fishes = new Vector<Fish>();
+	
+	/**
+	 * Perform double buffering to avoid
+	 * flickering in visuals.
+	 */
+	Graphics memoryGraphics;
+	
+	/**
+	 * Instantiates objects and kicks off
+	 * the thread running the remainder of
+	 * the application.
+	 * @throws IOException 
+	 */
+	public Tank() throws IOException {
+		setTitle("Virtual_FishCenterLive");
+		
+		// Assign window attributes
+		this.setIconImage(ImageIO.read(new File("images/Icon.png")));
+		int SizeOfTaskBarInWindows = 40;
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize((int)screenSize.getWidth(), (int) screenSize.getHeight() - SizeOfTaskBarInWindows);
+		setResizable(false);
+		setVisible(true);
+		
+		// Retrieve fish graphics
+		fishImages = getFishPix();
+		
+		// Handle background image and resize to window size
+		tankImage = ImageIO.read(new File("images/Tank.gif"));
+				
+		// Create the double-buffer image
+		memoryImage = createImage(getSize().width, getSize().height);
+		memoryGraphics = memoryImage.getGraphics();
+		
+		// Create and start the thread
+		thread = new Thread(this);
+		thread.start();
+		
+		// Handle when the X button is clicked
+		this.addWindowListener(new WindowAdapter(){
+			public void windowClosing(
+				WindowEvent windowEvent){
+					continueSwimming = false;
+					System.exit(0);
+			}
+		});
+		
+	}
+
+	private Vector<Image> getFishPix() {
+		Vector<Image> fishPix = new Vector<Image>();
+		try {
+			boolean debug = false;
+			if(debug){
+				// Retrieve fish images
+				fishPix.add(ImageIO.read(new File("images/TangRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/TangLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/oleBlueRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/oleBlueLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/MimosaRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/MimosaLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/GreenbirdRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/GreenbergLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/SirSquirtRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/SirSquirtLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/dottyRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/dottyLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/MammothRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/MammothLeft.gif")));
+				fishPix.add(ImageIO.read(new File("images/Hamburger.gif")));
+				fishPix.add(ImageIO.read(new File("images/thlumpRight.gif")));
+				fishPix.add(ImageIO.read(new File("images/thlumpLeft.gif")));
+			}
+			if(!debug){
+				fishPix.add(ImageIO.read(getClass().getResource("/resources/TangRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/TangLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/oleBlueRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/oleBlueLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/MimosaRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/MimosaLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/GreenbirdRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/GreenbergLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/SirSquirtRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/SirSquirtLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/dottyRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/dottyLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/MammothRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/MammothLeft.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/Hamburger.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/thlumpRight.gif")));
+				fishPix.add(ImageIO.read(getClass().getResource("resources/thlumpLeft.gif")));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return fishPix;
+	}
+
+	/**
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		int left = 0 + getInsets().left;
+		int top = 0 + getInsets().top;
+		int right = getSize().width - (getInsets().left + getInsets().right);
+		int bottom = getSize().height - (getInsets().top + getInsets().bottom);
+		Rectangle edges = new Rectangle(
+			left, // Get left edge (- 25% to go left)
+			top,  // Get top edge( - 25% to go above)
+			right, // Get right edge to go right, 25%
+			bottom // Leave the bottom
+		);
+		
+		// Create fish and add to fish vector
+		Vector<Image> TangPix = new Vector<Image>();
+		Vector<Image> oleBluePix = new Vector<Image>();
+		Vector<Image> MimosaPix = new Vector<Image>();
+		Vector<Image> GreenbirdPix = new Vector<Image>();
+		Vector<Image> SirSquirtPix = new Vector<Image>();
+		Vector<Image> DottyPix = new Vector<Image>();
+		Vector<Image> MammothPix = new Vector<Image>();
+		Vector<Image> HamburgerPix = new Vector<Image>();
+		Vector<Image> ThlumpPix = new Vector<Image>();
+		TangPix.add(fishImages.get(0));
+		TangPix.add(fishImages.get(1));
+		oleBluePix.add(fishImages.get(2));
+		oleBluePix.add(fishImages.get(3));
+		MimosaPix.add(fishImages.get(4));
+		MimosaPix.add(fishImages.get(5));
+		GreenbirdPix.add(fishImages.get(6));
+		GreenbirdPix.add(fishImages.get(7));
+		SirSquirtPix.add(fishImages.get(8));
+		SirSquirtPix.add(fishImages.get(9));
+		DottyPix.add(fishImages.get(10));
+		DottyPix.add(fishImages.get(11));
+		MammothPix.add(fishImages.get(12));
+		MammothPix.add(fishImages.get(13));
+		HamburgerPix.add(fishImages.get(14));
+		ThlumpPix.add(fishImages.get(15));
+		ThlumpPix.add(fishImages.get(16));
+		fishes.add(new Hamburger(HamburgerPix, edges, this));
+		fishes.add(new Thlump(ThlumpPix, edges, this));
+		fishes.add(new Tang(TangPix, edges, this));
+		fishes.add(new OleBlue(oleBluePix, edges, this));
+		fishes.add(new Mimosa(MimosaPix, edges, this));
+		fishes.add(new GreenBird(GreenbirdPix, edges, this));
+		fishes.add(new SirSquirt(SirSquirtPix, edges, this));
+		fishes.add(new Dotty(DottyPix, edges, this));
+		fishes.add(new Mammoth(MammothPix, edges,this));
+		
+		// Loop while fish swim
+		while(continueSwimming){
+			 for (int loopIndex = 0; loopIndex < numberOfFish; loopIndex++){
+				// Get fish, tell it to swim
+				Fish fish = (Fish)fishes.elementAt(loopIndex);
+				fish.swim();
+			}
+			 
+			// Wait between each execution
+			try {
+				Thread.sleep(sleepTime);
+			}catch(Exception exp){
+				System.out.println("Tried to wait between method calls...");
+				System.out.println(exp.getMessage());
+				exp.printStackTrace();
+			}
+			
+			// Redraw the scene
+			repaint();
+		}
+	}
+	
+	// Update method to handle the double-buffering
+	public void update(Graphics g){
+		// Draw the tank and the fish
+		memoryGraphics.drawImage(tankImage, 0, 0, this);
+		for(int loopIndex = 0; loopIndex < numberOfFish; loopIndex++){
+			((Fish)fishes.elementAt(loopIndex)).drawFishImage
+				(memoryGraphics);
+		}
+		g.drawImage(memoryImage, 0, 0, this);
+	}
+	
+	/**
+	 * Created to keep eclipse from yelling at me
+	 * for doing everything in the constructor.
+	 */
+	public void whoopwhoopImDone() {
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {	
+		try{
+		Tank fishCenter = new Tank();
+		fishCenter.whoopwhoopImDone();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
+}
